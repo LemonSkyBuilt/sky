@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: backtest-service
+server:
+  port: 8086
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
