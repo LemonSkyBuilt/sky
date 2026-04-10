@@ -32,3 +32,20 @@ java-verify:
     paths:
       - java-services/*/target/*.jar
       - java-services/*/target/surefire-reports/*
+
+cpp-verify:
+  stage: verify
+  image: ubuntu:24.04
+  before_script:
+    - apt-get update
+    - DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends build-essential cmake ninja-build
+  script:
+    - cmake -S cpp-services -B build/cpp -G Ninja -DCMAKE_BUILD_TYPE=Release
+    - cmake --build build/cpp --parallel
+    - ctest --test-dir build/cpp --output-on-failure
+  artifacts:
+    when: always
+    expire_in: 7 days
+    paths:
+      - build/cpp/bin/*
+      - build/cpp/Testing/**/*
