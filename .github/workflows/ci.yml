@@ -9,6 +9,44 @@ on:
   workflow_dispatch:
 
 jobs:
+  cpp-verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show C++ toolchain
+        run: |
+          cmake --version
+          ninja --version
+          c++ --version
+
+      - name: Configure CMake
+        run: cmake -S cpp-services -B build/cpp -G Ninja -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build C++ services
+        run: cmake --build build/cpp --parallel
+
+      - name: Run C++ tests
+        run: ctest --test-dir build/cpp --output-on-failure
+
+      - name: Upload C++ binaries
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cpp-binaries
+          path: build/cpp/bin/*
+          if-no-files-found: warn
+
+      - name: Upload CTest logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ctest-logs
+          path: build/cpp/Testing/**/*
+          if-no-files-found: warn
+
   java-verify:
     runs-on: ubuntu-latest
 

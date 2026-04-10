@@ -21,6 +21,13 @@ This repository contains the initial monorepo skeleton for a trading platform bu
 - `java-services/backtest-service`
 - `java-services/audit-service`
 
+## Current C++ Modules
+
+- `cpp-services/common`
+- `cpp-services/matching-engine`
+- `cpp-services/risk-core`
+- `cpp-services/market-replay-engine`
+
 ## Import Steps
 
 1. Install `JDK 21`.
@@ -34,7 +41,24 @@ This repository contains the initial monorepo skeleton for a trading platform bu
 - Main CI workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
 - Workflow guide: [`docs/development-workflow.md`](docs/development-workflow.md)
 
+
+## Local C++ Build
+
+Requirements:
+- `CMake 3.20+`
+- A C++20-capable compiler such as `g++` or `clang++`
+- `Ninja`
+
+Commands:
+
+```bash
+cmake -S cpp-services -B build/cpp -G Ninja -DCMAKE_BUILD_TYPE=Release
+cmake --build build/cpp --parallel
+ctest --test-dir build/cpp --output-on-failure
+```
 ## Notes
 
-- The current workspace provides a minimal Maven multi-module skeleton.
-- `java` and `mvn` were not available in the shell environment during initialization, so command-line build verification has not been executed yet.
+- The current workspace provides a minimal Maven multi-module skeleton plus a minimal C++ CMake workspace.
+- The C++ services currently expose bootstrap executables and `ctest` self-check coverage so CI can validate the native build path.
+- `java` and `mvn` were not available in the shell environment during initialization, so command-line Java build verification has not been executed here.
+

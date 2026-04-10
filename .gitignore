@@ -3,6 +3,11 @@
 
 /target/
 **/target/
+/build/
+**/build/
+CMakeUserPresets.json
+*.o
+*.obj
 
 *.log
 logs/
