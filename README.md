@@ -28,6 +28,12 @@ This repository contains the initial monorepo skeleton for a trading platform bu
 3. Import the root `pom.xml`.
 4. Use IDEA bundled Maven or a local Maven installation to sync dependencies.
 
+## Development Workflow
+
+- Git hosting and CI: `GitHub + GitHub Actions`
+- Main CI workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
+- Workflow guide: [`docs/development-workflow.md`](docs/development-workflow.md)
+
 ## Notes
 
 - The current workspace provides a minimal Maven multi-module skeleton.
