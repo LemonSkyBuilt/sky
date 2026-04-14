@@ -5,6 +5,7 @@
 **/target/
 /build/
 **/build/
+.vs/
 CMakeUserPresets.json
 *.o
 *.obj
