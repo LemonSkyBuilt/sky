@@ -6,9 +6,15 @@
 /build/
 **/build/
 .vs/
+/cpp-services/out/
 CMakeUserPresets.json
 *.o
 *.obj
 
 *.log
 logs/
+
+/.env
+/.env.local
+/deploy/.env
+/deploy/docker-compose.override.yml
