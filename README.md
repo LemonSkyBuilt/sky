@@ -40,7 +40,51 @@ This repository contains the initial monorepo skeleton for a trading platform bu
 - Git hosting and CI: `GitHub + GitHub Actions`
 - Main CI workflow: [`.github/workflows/ci.yml`](.github/workflows/ci.yml)
 - Workflow guide: [`docs/development-workflow.md`](docs/development-workflow.md)
+- Minimal closed-loop guide: [`docs/minimal-closed-loop.md`](docs/minimal-closed-loop.md)
 
+## Local Infra
+
+Requirements:
+- `Docker Desktop`
+- `docker compose`
+
+Files:
+- Compose file: [`deploy/docker-compose.yml`](deploy/docker-compose.yml)
+- Environment template: [`deploy/.env.example`](deploy/.env.example)
+- Start script: [`scripts/dev-up.ps1`](scripts/dev-up.ps1)
+- Stop script: [`scripts/dev-down.ps1`](scripts/dev-down.ps1)
+
+Start the local dependencies:
+
+```powershell
+./scripts/dev-up.ps1
+```
+
+Start the local dependencies with Redpanda Console:
+
+```powershell
+./scripts/dev-up.ps1 -WithConsole
+```
+
+Stop the local dependencies:
+
+```powershell
+./scripts/dev-down.ps1
+```
+
+Stop the local dependencies and delete local data volumes:
+
+```powershell
+./scripts/dev-down.ps1 -DeleteData
+```
+
+Default local endpoints:
+- `PostgreSQL`: `localhost:5432`
+- `Redpanda Kafka API`: `localhost:19092`
+- `Redpanda Schema Registry`: `localhost:18081`
+- `Redpanda HTTP Proxy`: `localhost:18082`
+- `Redpanda Admin API`: `localhost:19644`
+- `Redpanda Console`: `http://localhost:8086` when started with `-WithConsole`
 
 ## Local C++ Build
 
